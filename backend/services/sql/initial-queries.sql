@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `common_services` (
   `service_id` int(11) NOT NULL AUTO_INCREMENT,
   `service_name` varchar(255) NOT NULL,
   `service_description` TEXT,
+  `active_service` int(11) NOT NULL,
   PRIMARY KEY (service_id)
 ) ENGINE=InnoDB;
 
@@ -96,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `order_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `active_order` int(11) NOT NULL,
   `order_hash` varchar(255) NOT NULL,
+  `order_description` varchar(255) NOT NULL,
   PRIMARY KEY (order_id),
   FOREIGN KEY (employee_id) REFERENCES employee(employee_id), 
   FOREIGN KEY (customer_id) REFERENCES customer_identifier(customer_id),
@@ -126,14 +128,6 @@ CREATE TABLE IF NOT EXISTS `order_services` (
   FOREIGN KEY (service_id) REFERENCES common_services(service_id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `order_status` (
-  `order_status_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL,
-  `order_status` int(11) NOT NULL,
-  PRIMARY KEY (order_status_id),
-  FOREIGN KEY (order_id) REFERENCES orders(order_id)
-) ENGINE=InnoDB;
-
 -- Add the roles to the database 
 INSERT INTO company_roles (company_role_name)
 VALUES ('Employee'), ('Manager'), ('Admin');
@@ -147,7 +141,7 @@ VALUES (1, 'Admin', 'Admin', 555-555-5555);
 
 -- Password is 123456
 INSERT INTO employee_pass (employee_id, employee_password_hashed)
-VALUES (1, '$2b$10$B6yvl4hECXploM.fCDbXz.brkhmgqNlawh9ZwbfkFX.F3xrs.15Xi');  
+VALUES (1, '$2b$10$eJWYoJzoo9Px8GzbG1YG2.2KNT3wizn/coooM0hrKQT/W94A0.jvq');  
 
 INSERT INTO employee_role (employee_id, company_role_id)
 VALUES (1, 3); 

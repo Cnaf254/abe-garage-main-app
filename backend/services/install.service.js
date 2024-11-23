@@ -6,7 +6,6 @@ const fs = require('fs');
 async function install() {
   // Create a variable to hold the path to the sql file  
   const queryfile = __dirname + '/sql/initial-queries.sql';
-  // console.log(queryfile);
   // Temporary variable, used to store all queries, the return message and the current query
   let queries = [];
   let finalMessage = {};
@@ -37,9 +36,7 @@ async function install() {
   for (let i = 0; i < queries.length; i++) {
     try {
       const result = await conn.query(queries[i]);
-      console.log("Table created");
     } catch (err) {
-      // console.log("Err Occurred - Table not created");
       finalMessage.message = "Not all tables are created";
     }
   }
